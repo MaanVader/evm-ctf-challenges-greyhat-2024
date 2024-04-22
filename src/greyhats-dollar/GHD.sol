@@ -145,11 +145,11 @@ contract GHD {
      * @return         Whether the approval succeeded.
      */
     function approve(address spender, uint256 amount) external returns (bool) {
-        allowance[msg.sender][spender] = amount;
+        allowance[msg.sender][spender] = amount; //allow spender to spend msg.sender amount
         
-        emit Approval(msg.sender, spender, amount);
+        emit Approval(msg.sender, spender, amount); //emit event
 
-        return true;
+        return true; //return true
     }
 
     // ============================================ VIEW FUNCTIONS ===========================================
@@ -161,7 +161,7 @@ contract GHD {
      * @return      The GHD balance of the user.
      */
     function balanceOf(address user) public view returns (uint256) {
-        return _sharesToGHD(shares[user], _conversionRate(), false);
+        return _sharesToGHD(shares[user], _conversionRate(), false); //convert shares of the users to GHD with the converson rate and no rounding up
     }
     
     /**
@@ -170,7 +170,7 @@ contract GHD {
      * @return  The GHD total supply.
      */
     function totalSupply() external view returns (uint256) {
-        return _sharesToGHD(totalShares, _conversionRate(), false);
+        return _sharesToGHD(totalShares, _conversionRate(), false); //converts the total shares of GHD with the conversion rate and does not round up
     }
 
     // ============================================== HELPERS ===============================================
