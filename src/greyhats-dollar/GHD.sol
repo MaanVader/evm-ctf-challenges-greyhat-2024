@@ -176,9 +176,9 @@ contract GHD {
     // ============================================== HELPERS ===============================================
 
     function _conversionRate() internal view returns (uint256) {
-        uint256 timePassed = block.timestamp - lastUpdated;
-        uint256 multiplier = deflationRatePerSecond * timePassed;
-        return conversionRate - conversionRate.mulWadDown(multiplier);
+        uint256 timePassed = block.timestamp - lastUpdated; //gets the current block.timestamp - lastUpdate
+        uint256 multiplier = deflationRatePerSecond * timePassed; //multiplier = deflationRPS * timePassed
+        return conversionRate - conversionRate.mulWadDown(multiplier); conversionRate. Mulwad down = *x*y)/Wad Down
     }
 
     function _sharesToGHD(
@@ -186,7 +186,7 @@ contract GHD {
         uint256 _rate,
         bool roundUp
     ) internal pure returns (uint256) {
-        return roundUp ? _shares.mulWadUp(_rate) : _shares.mulWadDown(_rate);
+        return roundUp ? _shares.mulWadUp(_rate) : _shares.mulWadDown(_rate); //true round up and flase round down
     }
 
     function _GHDToShares(
@@ -194,6 +194,6 @@ contract GHD {
         uint256 _rate,
         bool roundUp
     ) internal pure returns (uint256) {
-        return roundUp ? _balance.divWadUp(_rate) : _balance.divWadDown(_rate);
+        return roundUp ? _balance.divWadUp(_rate) : _balance.divWadDown(_rate); //true = divide then round up , false = divide then round down
     }
 }
